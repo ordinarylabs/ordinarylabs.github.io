@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="only to be used by wolves, dragons, lions, tigers, bears, bats, orcas & octopuses.">
+
+    <link rel="stylesheet" href="styles/ssht.css">
+    <script type="module" defer src="scripts/ssht.js"></script>
+
+    <title>s00per sneaky hacker t001s 101</title>
+</head>
+
+<body>
+    <header>
+        <br>
+        <h1>s00per sneaky hacker t001s 101</h1>
+        <br>
+        <hr>
+        <p>. / △ □ ⬠ ○</p>
+        <p>
+            with love, a garden: secrets planted, growing in the manure of 
+            <a href="https://github.com/ordinarylabs/rgp">RGP</a>, guarded 
+            by the spirit of a once benevolent tiger named, "fuzz."
+        </p>
+        <hr>
+    </header>
+    <br>
+    <main>
+        <h3>purpose</h3>
+        <p>
+            exist as an interactive and [slightly] more accessible 
+            mechanism for the differently enlightened to learn about the "what?" of end-to-end
+            encryption &amp; digital signatures, with some context to provide a 
+            high level overview for the "how?" they're leveraged, in practice.
+        </p>
+        <br>
+        <h2>signing keys</h2>
+        <p>
+            this set of keys is used for <i>verification</i>. 
+            your "digital signature" or your "fingerprint" unique
+            to you as the <i>sender</i> of messages.
+        </p>
+        <p>
+            when you create a new message, you "sign" it with your
+            <i>private</i> signing key/fingerprint, and the recipient of your
+            message, uses your <i>public</i> "verifying" key, to check that
+            the message is actually from <strong>you</strong>.
+        </p>
+        <p>
+            your <i>private</i> signing key/fingerprint should be treated like
+            a password, and stored somewhere secure (i.e a password manager).
+            your <i>public</i> verifying key can be shared freely and sent around
+            to all your friends who you intend to share messages with.
+        </p>
+        <p>
+            use the button below to generate your signing keys. the underlying implementation
+            uses <a href="https://en.wikipedia.org/wiki/EdDSA">Ed25519</a>.
+        </p>
+        <button id="gen-signing-keys">generate keys</button>
+        <div id="signing-keys"></div>
+        <br>
+        <h2>exchange keys</h2>
+        <p>
+            this set of keys is used for the "end-to-end" parts of e2ee. the
+            <a href="https://en.wikipedia.org/wiki/Diffie–Hellman_key_exchange">Diffie-Hellman key exchange</a>
+            algorithm enables two or more people to safely send each other 
+            <i>public</i> keys, and mix those public keys up with their safely hidden, 
+            corresponding <i>private</i> keys, using some fancy math, to generate the <strong>same</strong>
+            <i>secret</i> key on either end.
+        </p>
+        <p>
+            long story short: when i mix your public key with my private key, and you mix my public key 
+            with your private key, they produce the same secret, and the channel remains secure so long
+            as we both keep our private keys a secret.
+        </p>
+        <p>
+            just like with the signing keys, your <i>private</i> exchange key 
+            should be treated like a password, and stored with a password manager.
+            your <i>public</i> exchange key can/should be shared freely and sent around
+            to all your friends who you intend to share messages with.
+        </p>
+        <p>
+            use the button below to generate your signing keys. the underlying implementation 
+            uses <a href="https://en.wikipedia.org/wiki/Curve25519">X25519</a>.
+        </p>
+        <button id="gen-exchange-keys">generate keys</button>
+        <div id="exchange-keys"></div>
+        <br>
+        <h2>encrypt</h2>
+        <p>
+            to encrypt your message, we use yet another bit of fun, fancy, math. the key exchange 
+            only helps us to generate a shared secret, but does not allow us to actually
+            encrypt/scramble up your message; for message encryption we use what's called 
+            "symmetrical encryption" to scramble up the content of your message.
+        </p>
+        <p>
+            when you hit "encrypt" the following happens: 
+            1. sign the message with your private key
+            2. generate one-time 256 bit encryption key
+            3. encrypt the message and signature using the one-time key
+            (by encrypting your signature, we are also able to preserve
+            sender-deniability, so long as the private exchange keys are not compromised)
+            4. generate the shared secret with your private and their public key
+            5. encrypt the one-time key using the shared secret. by encrypting an
+            ephemeral/one-time key instead of using the shared secret directly, 
+            we unlock the ability to send one message to multiple recipients, without having
+            to re-encrypt the message/signature for each (similar
+            to <a href="https://en.wikipedia.org/wiki/Pretty_Good_Privacy">PGP</a>'s approach)
+        </p>
+        <p>
+            plug in your private keys and their public exchange key below 
+            to sign and encrypt your message. the underlying implementation
+            uses <a href="https://en.wikipedia.org/wiki/ChaCha20-Poly1305">ChaCha20Poly1305</a>
+            for the symmetrical encryption algorithm.
+        </p>
+        <form id="encrypt-form">
+            <label for="encrypt-signing-key">your private signing key:</label>
+            <input id="encrypt-signing-key" type="password">
+            <br>
+            <label for="encrypt-private-key">your private exchange key:</label>
+            <input id="encrypt-private-key" type="password">
+            <br>
+            <label for="encrypt-public-key">their public exchange key:</label>
+            <input id="encrypt-public-key" type="text">
+            <br>
+            <label for="encrypt-message">message:</label>
+            <textarea id="encrypt-message"></textarea>
+            <br>
+            <br>
+            <button type="submit">encrypt</button>
+        </form>
+        <div id="encrypted-message"></div>
+        <br>
+        <h2>decrypt</h2>
+        <p>
+            on the receiving end, we are doing basically the same things 
+            we did on the sending side, just in near-reverse order, and with
+            their public verifying key, instead of our private signing key.
+        </p>
+        <p>
+            when you hit "decrypt" the following happens:
+            1. generate shared secret with exchange keys
+            2. decrypt the one-time 256 bit encryption key with the shared secret 
+            3. decrypt the message and signature with the one-time encryption key 
+            4. verify the sender's signature with their public verification key. so long
+            as the signature is valid, and the sender's private signing key/fingerprint
+            has not been compromised, you can be confident this message was sent from
+            the person you expected.
+        </p>
+        <p>
+            plug in your private exchange key and their public keys below
+            to decrypt and verify their message.
+        </p>
+        <form id="decrypt-form">
+            <label for="decrypt-verifying-key">their public verifying key:</label>
+            <input id="decrypt-verifying-key" type="text">
+            <br>
+            <label for="decrypt-public-key">their public exchange key:</label>
+            <input id="decrypt-public-key" type="text">
+            <br>
+            <label for="decrypt-private-key">your private exchange key:</label>
+            <input id="decrypt-private-key" type="password">
+            <br>
+            <label for="decrypt-message">encrypted message:</label>
+            <textarea id="decrypt-message"></textarea>
+            <br>
+            <br>
+            <button type="submit">decrypt</button>
+        </form>
+        <div id="decrypted-message"></div>
+        <br>
+        <h3>disclaimer</h3>
+        <p>
+            the <a href="https://github.com/ordinarylabs/RGP?tab=security-ov-file">underlying implementation</a> 
+            has not been audited or reviewed by any 3rd party.
+            the purpose of this webpage is to provide a conceptual model and
+            illustrate how end-to-end encryption and digital signatures <i>can</i> be used
+            to securely send and verify content over an insecure channel.
+        </p>
+        <p>
+            this example is not intended to be used for sensitive or classified or 
+            any other kind of important information. use at your own risk.
+        </p>
+        <h3>privacy</h3>
+        <p>
+            this webpage is static; nothing entered is stored or sent anywhere.
+        </p>
+    </main>
+    <footer>
+        <br>
+        <br>
+        <hr>
+        <p>a sleeping dragon lies in wait, curled up beneath a mighty oak tree.</p>
+        <p>4 6 8 12 20 π</p>
+        <hr>
+        <br>
+        <p>© 2025 <a href="https://ordinarylabs.io">Ordinary Labs</a></p>
+    </footer>
+</body>
+</html>
