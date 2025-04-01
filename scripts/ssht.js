@@ -1,6 +1,8 @@
 import init, { generate_fingerprint, generate_dh_keys, encrypt_dh, decrypt_dh, } from "./rgp-web/rgp_web.js";
 
 (async () => {
+    console.log("sup. if you'd like to be cool and use e2ee in your own app, check out https://www.npmjs.com/package/rgp-web.");
+
     await init();
     
     const genSigningKeyBtn = document.getElementById('gen-signing-keys');
