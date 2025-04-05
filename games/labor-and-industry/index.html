@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Labor & Industry</title>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <script defer src="main.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <strong>(WIP)</strong>
+      <nav>
+        <a href="/games/labor-and-industry">Labor & Industry</a> | <a href="/games/labor-and-industry/calculator.html">Calculator</a> |
+        <a href="/games/labor-and-industry/premise.html">Premise</a>
+      </nav>
+    </header>
+    <main>
+      <section id="board">
+        <section id="board-header">
+          <h1>Labor & Industry</h1>
+
+          <section id="game-time">
+            <h2 id="current-quarter">Quarter</h2>
+            <input type="range" />
+
+            <h2 id="current-month">Month</h2>
+            <input type="range" />
+          </section>
+        </section>
+
+        <section id="upper-board">
+          <h2>Process</h2>
+          <section id="equipment">
+            <div id="slot-1">equipment 1</div>
+            <div id="slot-2">equipment 2</div>
+            <div id="slot-3">equipment 3</div>
+            <div id="slot-4">equipment 4 (4+ operators)</div>
+            <div id="slot-5">equipment 5 (5+ operators)</div>
+          </section>
+
+          <section id="refinement">
+            <h3>Refinement</h3>
+            <input type="range" />
+          </section>
+        </section>
+
+        <section id="lower-board">
+          <section id="cards">
+            <h2>Cards</h2>
+            <div><h3>Equipment</h3></div>
+            <div><h3>Mishap</h3></div>
+          </section>
+          <div id="cash">
+            <h2>Cash Position</h2>
+            <section>
+              <h3>Current</h3>
+              <input type="range" />
+            </section>
+            <section>
+              <h3>Baseline</h3>
+              <input type="range" />
+            </section>
+          </div>
+          <div id="units">
+            <h2>Units</h2>
+            <section>
+              <h3>Cumulative</h3>
+              <input type="range" />
+            </section>
+            <section>
+              <h3>Inventory</h3>
+              <input type="range" />
+            </section>
+          </div>
+        </section>
+      </section>
+
+      <section id="under-board">
+        <section id="compensation">
+          <h2>Compensation</h2>
+          <section>
+            <div id="manager">
+              <h3>Manager</h3>
+              <input type="range" />
+            </div>
+            <div id="engineer">
+              <h3>Engineer</h3>
+              <input type="range" />
+            </div>
+            <div id="operator">
+              <h3>Operator</h3>
+              <input type="range" />
+            </div>
+          </section>
+        </section>
+
+        <section id="dice">
+          <h2>Dice</h2>
+          <div>
+            <span id="cost-of-goods">cost of goods</span>
+            <span id="demand">demand</span>
+          </div>
+        </section>
+      </section>
+
+      <section id="players">
+        <div class="manager" id="1">
+          <h2>1 (manager)</h2>
+          <h3 class="years">years</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+        <div class="engineer" id="2">
+          <h2>2 (engineer 1)</h2>
+          <h3 class="level">level</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+        <div class="operator" id="3">
+          <h2>3 (operator 1)</h2>
+          <h3 class="injuries">injuries</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+        <div class="operator" id="4">
+          <h2>4 (operator 2)</h2>
+          <h3 class="injuries">injuries</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+        <div class="operator" id="5">
+          <h2>5 (operator 3)</h2>
+          <h3 class="injuries">injuries</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+        <div class="engineer" id="6">
+          <h2>6 (engineer 2)</h2>
+          <h3 class="level">level</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+        <div class="operator" id="7">
+          <h2>7 (operator 4)</h2>
+          <h3 class="injuries">injuries</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+        <div class="operator" id="8">
+          <h2>8 (operator 5)</h2>
+          <h3 class="injuries">injuries</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+        <div class="engineer" id="9">
+          <h2>9 (engineer 3)</h2>
+          <h3 class="level">level</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+        <div class="operator" id="10">
+          <h2>10 (operator 6)</h2>
+          <h3 class="injuries">injuries</h3>
+          <h3 class="wealth">wealth</h3>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <footer>© 2025 <a href="/">Ordinary Labs</a></footer>
+    </footer>
+  </body>
+</html>

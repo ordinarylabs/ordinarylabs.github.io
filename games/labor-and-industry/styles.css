@@ -1,0 +1,103 @@
+#board {
+  background-color: whitesmoke;
+  border: 1px black solid;
+  padding: 4px;
+}
+
+#board-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#game-time {
+  display: flex;
+}
+
+#upper-board {
+  width: 100%;
+  background-color: white;
+  height: 200px;
+}
+
+#equipment {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  width: 98%;
+  margin-left: 1%;
+  height: 100px;
+}
+
+#equipment > div {
+  width: 100px;
+  background-color: darkgrey;
+}
+
+#refinement {
+  display: flex;
+}
+
+#lower-board {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#lower-board > div {
+  background-color: lightgrey;
+  width: 32%;
+  height: 400px;
+}
+
+#cards {
+  width: 32%;
+  height: 400px;
+}
+
+#cards > div {
+  width: 60%;
+  height: 150px;
+  margin-top: 10px;
+  background-color: darkgrey;
+}
+
+#under-board {
+  display: flex;
+}
+
+#compensation {
+  width: 69%; /* nice */
+}
+
+#dice > div {
+  margin-top: 10px;
+  width: 160px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#dice > div > span {
+  height: 75px;
+  width: 75px;
+  background-color: darkgrey;
+}
+
+#players {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.manager {
+  background-color: salmon;
+}
+
+.engineer {
+  background-color: lightgreen;
+}
+
+.operator {
+  background-color: lightblue;
+}

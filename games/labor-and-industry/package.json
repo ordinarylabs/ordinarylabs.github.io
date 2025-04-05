@@ -1,0 +1,21 @@
+{
+  "name": "labor-and-industry",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "tsc --noEmit && esbuild main.ts --bundle --minify --target=chrome58,firefox57,safari11,edge18 --outdir=.",
+    "build:watch": "nodemon -e ts",
+    "lint": "eslint --fix && prettier . --write"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
+    "esbuild": "^0.21.5",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.2",
+    "typescript": "^5.5.2"
+  }
+}
